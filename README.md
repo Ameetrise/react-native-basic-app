@@ -11,11 +11,42 @@ npm install react-native-basic-app
 ## Usage
 
 ```js
-import { multiply } from 'react-native-basic-app';
-
+import {
+  Container,
+  ShowMenuContext,
+  AlertContext,
+} from 'react-native-basic-screen';
 // ...
 
-const result = await multiply(3, 7);
+return (
+    <ShowMenuContext.Provider
+      value={{
+        shouldShowMenu,
+        setShouldShowMenu,
+      }}
+    >
+      <AlertContext.Provider
+        value={{
+          setAlertMessage,
+          setShouldShowAlert,
+          shouldShowAlert,
+          alertMessage: 'Hello im alert',
+        }}
+      >
+        <View style={styles.container}>
+          <Container
+            showBackButton
+            narrowMode
+            headerTitle={'Home'}
+            children={
+              <Text>
+                Im a child and im so happy to be rendered by a container.
+              </Text>
+            }
+          />
+        </View>
+      </AlertContext.Provider>
+    </ShowMenuContext.Provider>
 ```
 
 ## Contributing

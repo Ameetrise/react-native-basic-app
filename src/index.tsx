@@ -10,12 +10,14 @@ import Drawer from './Drawer';
 import AlertMessage from './AlertModel';
 import { AlertContext, ShowMenuContext } from './modelProvider';
 import { TouchableOpacity } from 'react-native';
-import { Button } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-type RightIconTypes = { name: string; onPress: () => void };
+type RightIconTypes = { icon: JSX.Element; onPress: () => void };
 
 function Container({
   headerTitle,
+  backIcon,
+  menuIcon,
   rightIcon,
   children,
   backButtonPress,
@@ -33,6 +35,8 @@ function Container({
   children: JSX.Element;
   backButtonPress?: () => void;
   showBackButton?: boolean;
+  backIcon?: JSX.Element;
+  menuIcon?: JSX.Element;
   headerShown?: boolean;
   narrowMode?: boolean;
   scrollable?: boolean;
@@ -61,9 +65,23 @@ function Container({
         onPressOk={(): void => setShouldShowAlert(false)}
       />
       {headerShown && (
-        <View style={[styles.headerContainer, { backgroundColor: 'white' }]}>
+        <View style={[styles.headerContainer, { backgroundColor: 'purple' }]}>
           {showBackButton ? (
-            <Text>Header</Text>
+            <View>
+              {backIcon ? (
+                backIcon
+              ) : (
+                <Ionicons
+                  onPress={() => {
+                    console.log('OnBackPress');
+                  }}
+                  style={{ padding: '4%' }}
+                  name={'arrow-back'}
+                  size={24}
+                  color={'blue'}
+                />
+              )}
+            </View>
           ) : (
             <TouchableOpacity
               onPress={(): void => {
@@ -71,7 +89,11 @@ function Container({
               }}
               style={{ padding: 8 }}
             >
-              <Text>M</Text>
+              {menuIcon ? (
+                menuIcon
+              ) : (
+                <Ionicons name="menu" size={32} color={'red'} />
+              )}
             </TouchableOpacity>
           )}
           <Text
@@ -86,7 +108,7 @@ function Container({
           >
             {headerTitle}
           </Text>
-          {rightIcon && <Text>Right</Text>}
+          {rightIcon && rightIcon}
         </View>
       )}
       {scrollable ? (
@@ -94,17 +116,11 @@ function Container({
           overScrollMode="never"
           style={[
             styles.bodyContainer,
-            { overflow: 'scroll' },
+            { overflow: 'scroll', height: '100%' },
             narrowMode ? { paddingRight: '14%' } : {},
           ]}
         >
-          <Button
-            title="Click"
-            onPress={() => {
-              setShouldShowAlert(true);
-            }}
-          />
-          {/* {children} */}
+          {children}
         </ScrollView>
       ) : (
         <KeyboardAvoidingView
@@ -118,16 +134,10 @@ function Container({
                   paddingLeft: '0%',
                   paddingRight: '0%',
                 }
-              : {},
+              : { height: '93%' },
           ]}
         >
           {children}
-          <Button
-            title="Click"
-            onPress={() => {
-              setShouldShowAlert(true);
-            }}
-          />
         </KeyboardAvoidingView>
       )}
     </SafeAreaView>

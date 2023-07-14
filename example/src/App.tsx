@@ -6,7 +6,7 @@ import {
   ShowMenuContext,
   AlertContext,
 } from 'react-native-basic-app';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 export default function App() {
   const [shouldShowMenu, setShouldShowMenu] = React.useState(false);
   const [alertMessage, setAlertMessage] = React.useState(
@@ -31,13 +31,15 @@ export default function App() {
       >
         <View style={styles.container}>
           <Container
-            // showBackButton
-            narrowMode
-            headerTitle={'Im header'}
+            headerTitle={'Home Screen'}
             children={
-              <Text>
-                Im children and im so happy lets see how long does this check go
-              </Text>
+              <View>
+                <Text>
+                  Im children and im so happy lets see how long does this check
+                  go
+                </Text>
+                <FontAwesome name={'music'} size={28} color={'red'} />
+              </View>
             }
           />
         </View>
@@ -49,7 +51,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'grey',
+    backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
