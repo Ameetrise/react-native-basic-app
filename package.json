@@ -1,6 +1,6 @@
 {
   "name": "react-native-basic-app",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Bacis App with container and reusable context providers",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
