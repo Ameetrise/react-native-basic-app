@@ -5,6 +5,7 @@ Basic App with container and reusable context providers
 ## Other Dependency
 
 [Vector Icons](https://github.com/oblador/react-native-vector-icons)
+
 ```sh
 npm install react-native-vector-icons
 ```
@@ -55,6 +56,7 @@ return (
       </AlertContext.Provider>
     </ShowMenuContext.Provider>
 ```
+
 Use ShowMenuContext.Provider to use Drawer and AlertContext.Provider to use custom model with context in your root component.
 Customization properties:
   headerTitle: string;                                      //screen title
@@ -77,6 +79,7 @@ Customization properties:
   wideSymmetrical?: boolean;                                //full width container
   fullScreen?: boolean;                                     //full screen container
   wholeScreen?: boolean;                                    //whole screen container (no header)
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
