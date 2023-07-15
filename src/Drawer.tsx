@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { View, Dimensions, Text } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import drawerStyles from './drawerStyles';
 import ReactNativeModal from 'react-native-modal';
 // import { ShowMenuContext } from './modelProvider';
@@ -10,20 +10,17 @@ import ReactNativeModal from 'react-native-modal';
  */
 const { height, width } = Dimensions.get('screen');
 function Drawer({
+  children,
   shouldShow,
   onBackdropPress,
 }: {
+  children?: JSX.Element;
   shouldShow: boolean;
   onBackdropPress: () => void;
 }): JSX.Element {
-  // const { setShouldShowMenu } = useContext(ShowMenuContext);
   const [internalShouldShowMenu, setInternalShouldShowMenu] =
     useState(shouldShow);
-  // const closeAndNavigate = () => {
-  //   setInternalShouldShowMenu(false);
-  //   setShouldShowMenu(false);
-  //   // navigateFunc();
-  // };
+
   return (
     <ReactNativeModal
       propagateSwipe
@@ -37,7 +34,7 @@ function Drawer({
       animationOut="slideOutLeft"
     >
       <View style={[drawerStyles.container, { backgroundColor: 'white' }]}>
-        <Text>Hello Im drawer</Text>
+        {children}
       </View>
     </ReactNativeModal>
   );

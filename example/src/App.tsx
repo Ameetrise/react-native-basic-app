@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
@@ -31,7 +32,20 @@ export default function App() {
       >
         <View style={styles.container}>
           <Container
-            headerTitle={'Home Screen'}
+            drawerContent={
+              <View style={{ flexDirection: 'column' }}>
+                <Text>Hello</Text>
+                <Text>Hello</Text>
+                <Text>Hello</Text>
+              </View>
+            }
+            rightIcon={{
+              icon: <FontAwesome name="home" size={24} color={'black'} />,
+              onPress() {
+                console.log('Hello');
+              },
+            }}
+            headerTitle={'Home Nepali'}
             children={
               <View>
                 <Text>
@@ -51,7 +65,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },

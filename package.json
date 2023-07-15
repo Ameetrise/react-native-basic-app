@@ -1,7 +1,7 @@
 {
   "name": "react-native-basic-app",
-  "version": "0.1.0",
-  "description": "Bacis App waih container and reusable context providers",
+  "version": "0.1.2",
+  "description": "Bacis App with container and reusable context providers",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

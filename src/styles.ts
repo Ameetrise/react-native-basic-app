@@ -1,6 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const { width } = Dimensions.get('screen');
 export function ContainerStyling() {
   return StyleSheet.create({
     container: {
@@ -9,14 +8,11 @@ export function ContainerStyling() {
       backgroundColor: 'brown',
     },
     title: {
-      backgroundColor: 'grey',
-      alignSelf: 'center',
+      left: 64,
       width: '70%',
-      left: width / 2 - width / 4,
       position: 'absolute',
       maxHeight: 180,
       color: 'black',
-      // fontWeight: '700',
     },
     bodyContainer: {
       alignSelf: 'stretch',
@@ -24,19 +20,16 @@ export function ContainerStyling() {
       height: '95%',
       paddingLeft: '14%',
       paddingRight: '7%',
-      backgroundColor: 'pink',
+      backgroundColor: 'white',
     },
     headerContainer: {
-      backgroundColor: 'lightgreen',
       position: 'relative',
       flexDirection: 'row',
-      width: '100%',
       alignItems: 'center',
       justifyContent: 'space-between',
       height: '7%',
     },
     menu: {
-      color: 'orange',
       position: 'absolute',
       alignSelf: 'center',
       left: 25,

@@ -6,21 +6,28 @@ import { ContainerStyling } from './styles';
 import { Platform } from 'react-native';
 import React from 'react';
 import { Text } from 'react-native';
-import Drawer from './Drawer';
 import AlertMessage from './AlertModel';
 import { AlertContext, ShowMenuContext } from './modelProvider';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Drawer from './Drawer';
 
 type RightIconTypes = { icon: JSX.Element; onPress: () => void };
 
 function Container({
   headerTitle,
+  backBthColor,
   backIcon,
   menuIcon,
   rightIcon,
+  headerTextSize = 18,
   children,
+  backBtnSize,
   backButtonPress,
+  menuBtnColor,
+  menuBtnSize,
+  drawerContent,
+  titleColor,
   showBackButton,
   headerShown = true,
   narrowMode,
@@ -33,8 +40,15 @@ function Container({
   headerTitle: string;
   rightIcon?: RightIconTypes;
   children: JSX.Element;
+  backBthColor?: string;
   backButtonPress?: () => void;
   showBackButton?: boolean;
+  backBtnSize?: number;
+  drawerContent?: JSX.Element;
+  headerTextSize?: number;
+  titleColor?: string;
+  menuBtnColor?: string;
+  menuBtnSize?: number;
   backIcon?: JSX.Element;
   menuIcon?: JSX.Element;
   headerShown?: boolean;
@@ -55,6 +69,7 @@ function Container({
     <SafeAreaView>
       {shouldShowMenu && (
         <Drawer
+          children={drawerContent}
           shouldShow={shouldShowMenu}
           onBackdropPress={(): void => setShouldShowMenu(false)}
         />
@@ -65,50 +80,55 @@ function Container({
         onPressOk={(): void => setShouldShowAlert(false)}
       />
       {headerShown && (
-        <View style={[styles.headerContainer, { backgroundColor: 'purple' }]}>
+        <View style={[styles.headerContainer, {}]}>
           {showBackButton ? (
-            <View>
-              {backIcon ? (
-                backIcon
-              ) : (
+            <>
+              {backIcon || (
                 <Ionicons
-                  onPress={() => {
-                    console.log('OnBackPress');
-                  }}
-                  style={{ padding: '4%' }}
-                  name={'arrow-back'}
-                  size={24}
-                  color={'blue'}
+                  color={backBthColor || 'black'}
+                  name="arrow-back"
+                  size={backBtnSize || 28}
+                  style={[styles.menu, { left: 20 }]}
+                  onPress={backButtonPress}
                 />
               )}
-            </View>
+            </>
           ) : (
-            <TouchableOpacity
-              onPress={(): void => {
-                setShouldShowMenu(true);
-              }}
-              style={{ padding: 8 }}
-            >
-              {menuIcon ? (
-                menuIcon
-              ) : (
-                <Ionicons name="menu" size={32} color={'red'} />
+            <>
+              {menuIcon || (
+                <Ionicons
+                  name="menu"
+                  size={menuBtnSize || 28}
+                  style={styles.menu}
+                  color={menuBtnColor || 'black'}
+                  onPress={(): void => setShouldShowMenu(true)}
+                />
               )}
-            </TouchableOpacity>
+            </>
           )}
           <Text
             style={[
               styles.title,
               {
-                textAlign: headerTitle.length > 15 ? 'center' : 'left',
-                fontSize: headerTitle.length > 15 ? 12 : 16,
-                left: 54,
+                color: titleColor || 'black',
+                textAlign: headerTitle.length > 15 ? 'left' : 'center',
+                fontSize:
+                  headerTitle.length > 15 ? headerTextSize - 2 : headerTextSize,
+                // left: 48,
+                fontWeight: '700',
               },
             ]}
           >
             {headerTitle}
           </Text>
-          {rightIcon && rightIcon}
+          {rightIcon && (
+            <TouchableOpacity
+              onPress={rightIcon.onPress}
+              style={{ position: 'absolute', right: 24 }}
+            >
+              {rightIcon.icon}
+            </TouchableOpacity>
+          )}
         </View>
       )}
       {scrollable ? (
@@ -144,4 +164,4 @@ function Container({
   );
 }
 
-export { Container, ShowMenuContext, AlertContext };
+export { Container, ShowMenuContext, AlertContext, Drawer };
