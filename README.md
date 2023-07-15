@@ -1,6 +1,6 @@
 # react-native-basic-app
 
-Bacis App waih container and reusable context providers
+Basic App with container and reusable context providers
 
 ## Installation
 
